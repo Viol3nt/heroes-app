@@ -1,1 +1,79 @@
-<p>add works!</p>
+<h1 fxLayoutAlign="center">
+  {{ hero.id ? "Edit" : "New" }} Hero:
+  <span style="margin-inline-start: 1rem">{{ hero.superhero }}</span>
+</h1>
+<mat-divider></mat-divider>
+
+<div
+  fxLayout="row"
+  fxLayout.xs="column"
+  fxLayoutGap="2.5rem"
+  style="margin-block-start: 1rem"
+>
+  <div fxLayout="column" fxFlex="50">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="1rem">
+      <mat-form-field fxFlex="50" fxLayout.xs="column">
+        <mat-label>Superhero</mat-label>
+        <input matInput type="text" [(ngModel)]="hero.superhero" required />
+      </mat-form-field>
+
+      <mat-form-field fxFlex="50">
+        <mat-label>Alter Ego</mat-label>
+        <input matInput type="text" [(ngModel)]="hero.alter_ego" required />
+      </mat-form-field>
+    </div>
+
+    <mat-form-field>
+      <mat-label>First Appearance</mat-label>
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="hero.first_appearance"
+        required
+      />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Characters</mat-label>
+      <input matInput type="text" [(ngModel)]="hero.characters" required />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Publisher</mat-label>
+      <mat-select [(ngModel)]="hero.publisher" required>
+        <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">
+          {{ publisher.desc }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Photo</mat-label>
+      <input matInput type="text" [(ngModel)]="hero.alt_image" required />
+    </mat-form-field>
+    <div fxLayout="row" fxLayout.xs="column">
+      <button
+        fxFlex="100"
+        mat-raised-button
+        color="primary"
+        (click)="saveHero()"
+      >
+        <mat-icon>edit</mat-icon>
+        {{ hero.id ? "Edit" : "Add" }} Hero
+      </button>
+      <button
+        *ngIf="hero.id"
+        fxFlex="100"
+        mat-raised-button
+        color="warn"
+        (click)="deleteHero()"
+      >
+        <mat-icon>delete</mat-icon>
+        Delete
+      </button>
+    </div>
+  </div>
+  <div fxFlex="50">
+    <img [src]="hero | image" alt="Image of {{ hero.superhero }}" />
+  </div>
+</div>

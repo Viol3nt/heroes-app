@@ -25,4 +25,17 @@ export class HeroesService {
       `${this.baseUrl}/heroes?q=${condition}&_limit=6`
     );
   }
+
+  addHero(hero: Hero): Observable<Hero> {
+    hero.id = `dc-${hero.superhero.toLowerCase()}`;
+    return this.http.post<Hero>(`${this.baseUrl}/heroes`, hero);
+  }
+
+  updateHero(hero: Hero): Observable<Hero> {
+    return this.http.put<Hero>(`${this.baseUrl}/heroes/${hero.id}`, hero);
+  }
+
+  deleteHero(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/heroes/${id}`);
+  }
 }
