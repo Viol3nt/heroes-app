@@ -23,7 +23,10 @@
         <mat-option *ngFor="let hero of heroes" [value]="hero">
           {{ hero.superhero }}
         </mat-option>
-        <mat-option *ngIf="!heroes.length && condition" [value]="">
+        <mat-option
+          *ngIf="!heroes.length && condition && !selectedHero"
+          [value]=""
+        >
           Hero with name '{{ condition }}' wasn't found
         </mat-option>
       </mat-autocomplete>

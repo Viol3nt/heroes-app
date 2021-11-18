@@ -25,18 +25,17 @@ export class SearchComponent implements OnInit {
   }
 
   search(event: MatAutocompleteSelectedEvent): void {
-    const hero: Hero = event.option.value;
-
+    let hero: Hero = event.option.value;
+    console.log('event: ', event.option.value);
     if (!hero) {
       this.selectedHero = undefined;
       return;
     }
 
     this.heroes = [];
-    this.condition = hero.superhero!;
-
-    this.heroesService
-      .getHero(hero.id!)
-      .subscribe((hero) => (this.selectedHero = hero));
+    this.heroesService.getHero(hero.id!).subscribe((hero) => {
+      this.selectedHero = hero;
+      this.condition = hero.superhero!;
+    });
   }
 }

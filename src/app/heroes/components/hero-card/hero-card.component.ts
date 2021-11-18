@@ -8,6 +8,7 @@ import { Hero } from '../../interfaces/hero.interface';
     `
       mat-card {
         margin-top: 20px;
+        width: 50%;
       }
     `,
   ],
